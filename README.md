@@ -90,8 +90,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 # Initial version for postgres 11
 * Postgres 11:   master branch
-* Postgres 10:   pg10 branch (working on this)
-* Postgres 9.6:  p96 branch  (working on this)
+* Postgres 10:   p10 branch
+* Postgres 9.6:  p96 branch
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
