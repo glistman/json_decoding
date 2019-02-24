@@ -119,7 +119,6 @@ static void pg_decode_startup(LogicalDecodingContext *ctx, OutputPluginOptions *
     ctx->output_plugin_private = data;
 
     opt->output_type = OUTPUT_PLUGIN_TEXTUAL_OUTPUT;
-    opt->receive_rewrites = false;
 
     foreach(option, ctx->output_plugin_options)
     {
@@ -144,9 +143,6 @@ static void pg_decode_startup(LogicalDecodingContext *ctx, OutputPluginOptions *
                 has_parser_error = !parse_bool(strVal(elem->arg), &data->only_local);
             }
 
-        } else if (hasParameter(elem, "include-rewrites") && elem->arg != NULL) {
-
-            has_parser_error = !parse_bool(strVal(elem->arg), &opt->receive_rewrites);
         } else if (hasParameter(elem, "include-toast-datum") && elem->arg != NULL) {
 
             has_parser_error = !parse_bool(strVal(elem->arg), &data->include_toast_datum);
@@ -202,7 +198,6 @@ static void pg_decode_change(LogicalDecodingContext *ctx,
                            quote_qualified_identifier(
                                    get_namespace_name(
                                            get_rel_namespace(RelationGetRelid(relation))),
-                                   class_form->relrewrite ? get_rel_name(class_form->relrewrite) :
                                    NameStr(class_form->relname)));
 
     appendStringInfoString(ctx->out, "\", ");
